@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/04/29 14:42:01 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/04/29 16:36:10 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 18:45:54 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	offset(const char *format_str, int *i)
 	}
 }
 
-int	get_precision(double *nbr, const char *specif, int *multiplier)
+int	get_precision(double *nbr, const char *specif, long *multiplier)
 {
 	int	precision;
 	int	i;
@@ -49,15 +49,16 @@ int	get_precision(double *nbr, const char *specif, int *multiplier)
 	*nbr = *nbr + (0.5 / *multiplier);
 	return (precision);
 }
+#include <stdio.h>
 
 int	ft_print_float(double nbr, const char *specif)
 {
-	int	count;
-	int	multiplier;
-	int	precision;
-	int	decimal_number;
+	long	multiplier;
+	long	decimal_part;
+	long	integer_part;
+	int		precision;
+	int		count;
 
-	decimal_number = 0;
 	multiplier = 1;
 	count = 0;
 	if (nbr < 0)
@@ -65,14 +66,22 @@ int	ft_print_float(double nbr, const char *specif)
 		count += write(1, "-", 1);
 		nbr = -nbr;
 	}
+	integer_part = (long)nbr;
+	// decimal_part = nbr - integer_part;
+	printf("\nnbr before= %f\n", nbr);
 	precision = get_precision(&nbr, specif, &multiplier);
 	count += ft_putnbr_b(nbr, "0123456789");
+	printf("\nnbr after = %f\n", nbr);
 	if (precision > 0)
 	{
 		count += write(1, ".", 1);
-		decimal_number = nbr * multiplier - (int)nbr * multiplier;
-		count += ft_putnbr_b(decimal_number, "0123456789");
-		if (decimal_number == 0)
+		printf("\ninteger_part = %ld\n", integer_part);
+		printf("multiplier = %ld\n", multiplier);
+		printf("integer_part * multiplier = %ld\n", integer_part * multiplier);
+		decimal_part = ((nbr - integer_part) + 0.5) * multiplier;
+		printf("\ndecimal_part = %ld\n\n", decimal_part);
+		count += ft_putnbr_b(decimal_part, "0123456789");
+		if (decimal_part == 0)
 			while (--precision > 0)
 				count += write(1, "0", 1);
 	}
