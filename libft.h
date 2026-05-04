@@ -6,7 +6,7 @@
 /*   By: varaniba <varaniba@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/03/10 14:07:55 by varaniba      #+#    #+#                 */
-/*   Updated: 2026/05/04 17:28:23 by varaniba      ########   odam.nl         */
+/*   Updated: 2026/05/04 17:35:30 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdint.h>
+# include <stdarg.h>
 
 typedef struct s_list
 {
