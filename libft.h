@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: varaniba <varaniba@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/10 14:07:55 by varaniba          #+#    #+#             */
-/*   Updated: 2026/03/25 14:38:45 by varaniba         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   libft.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: varaniba <varaniba@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/03/10 14:07:55 by varaniba      #+#    #+#                 */
+/*   Updated: 2026/05/04 17:28:23 by varaniba      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,14 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+int		ft_printf(const char *format_str, ...);
+int		ft_print_char(int c);
+int		ft_print_str(char *str);
+int		ft_print_ptr(void *ptr);
+int		ft_putnbr_b(long long nbr, char *base);
+int		ft_putnbr_b_uns(unsigned long long nbr, char *base);
+int		ft_print_float(double nbr, const char *specif);
+void	offset(const char *format_str, int *i);
+int		get_precision(double *nbr, const char *specif, int *multiplier);
 
 #endif
