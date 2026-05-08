@@ -50,13 +50,21 @@ SRCS = ft_isalpha.c \
 	ft_e_printf_utils.c \
 	ft_e_printf_additional_specifier.c
 
-OBJS = $(SRCS:.c=.o)
+OBJS_DIR = objects_files
+
+OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-RM = rm -f
+RM = rm -rf
+
+# AR creates the archive file
+#   `ar` : GNU tool creates an archive file.
+#   `c` : creates the archive if it doesnt exist
+#   `s` :
+#   `r` :
 
 AR = ar csr
 
@@ -65,11 +73,21 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-%.o: %.c
+# Create the object files in the specified directory
+# the prerequisites include the directory where the
+# files will be placed
+
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+# Create object_files directory :
+# create a directory with the target name
+
+$(OBJS_DIR):
+	mkdir -p $@
+
 clean:
-	$(RM) $(OBJS)
+	$(RM) $(OBJS_DIR)
 
 fclean:	clean
 	$(RM) $(NAME)
